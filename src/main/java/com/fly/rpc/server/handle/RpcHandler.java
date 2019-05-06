@@ -33,6 +33,7 @@ public class RpcHandler extends SimpleChannelInboundHandler<RpcRequest> {
         RpcResponse response = new RpcResponse();
         response.setReponseId(request.getRequestId());
         try {
+            //通过反射去执行对应的方法
             Object serviceBean = handlerMap.get(request.getClassName().getName());
             Method method = serviceBean.getClass().getDeclaredMethod(request.getMethodName(),request.getParameterTypes());
             if(null != method){
